@@ -34,12 +34,12 @@ namespace BSynchro_RJP.Controllers.Users
             }
         }
 
-        [HttpGet]
-        public ActionResult<UserInfo> GetUser([FromHeader] int userId)
+        [HttpGet("{id?}")]
+        public ActionResult<UserInfo> GetUser(int id)
         {
             try
             {
-                UserInfo? userInfoToGet = _customersContextService.GetUserInfo(userId);
+                UserInfo? userInfoToGet = _customersContextService.GetUserInfo(id);
                 return userInfoToGet == null ? NotFound() : Ok(userInfoToGet);
             }
             catch (Exception ex)
