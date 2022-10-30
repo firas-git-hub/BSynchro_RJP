@@ -3,10 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using BSynchro_RJP.Models.Contexts;
 using BSynchro_RJP.Services.DBIntermidiaryServices.UserAccounts;
 using BSynchro_RJP.Services.Customers;
-using BSynchro_RJP.Services.DBIntermidiaryServices.UsersIntermediaryService.UsersIntermediaryService;
 using BSynchro_RJP.Services.DBIntermidiaryServices.Users;
 using BSynchro_RJP.Services.DBIntermidiaryServices.AccountTransactions;
 using System.Text.Json.Serialization;
+using BSynchro_RJP.Interface.Customers;
+using BSynchro_RJP.Interface.DBIntermidiaryServices.AccountTransactions;
+using BSynchro_RJP.Interface.DBIntermidiaryServices.UserAccounts;
+using BSynchro_RJP.Interface.DBIntermidiaryServices.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 

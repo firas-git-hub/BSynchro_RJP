@@ -1,6 +1,6 @@
 ﻿using BSynchro_RJP.Models.Entities;
 
-namespace BSynchro_RJP.Services.DBIntermidiaryServices.AccountTransactions
+namespace BSynchro_RJP.Interface.DBIntermidiaryServices.AccountTransactions
 {
     public interface IAccountTransactionsService
     {

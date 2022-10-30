@@ -1,6 +1,6 @@
 ﻿using BSynchro_RJP.Models.Entities;
 
-namespace BSynchro_RJP.Services.Customers
+namespace BSynchro_RJP.Interface.Customers
 {
     public interface ICustomersContextService
     {

@@ -25,15 +25,6 @@ namespace BSynchro_RJP.Services.ContextsModelRelations
         }
         private static void DefineRelationsForUserAccounts(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AccountTransaction>()
-                .HasKey(x => x.Id);
-            modelBuilder.Entity<AccountTransaction>()
-                .HasOne<UserAccount>()
-                .WithMany()
-                .HasForeignKey(x => x.AccountId);
-        }
-        private static void DefineRelationsForAccountTransactions(ModelBuilder modelBuilder)
-        {
             modelBuilder.Entity<UserAccount>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<UserAccount>()
@@ -43,6 +34,15 @@ namespace BSynchro_RJP.Services.ContextsModelRelations
                 .HasOne<User>()
                 .WithMany(x => x.Accounts)
                 .HasForeignKey(x => x.UserId);
+        }
+        private static void DefineRelationsForAccountTransactions(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AccountTransaction>()
+                .HasKey(x => x.Id);
+            modelBuilder.Entity<AccountTransaction>()
+                .HasOne<UserAccount>()
+                .WithMany(y => y.Transactions)
+                .HasForeignKey(x => x.AccountId);
         }
     }
 }

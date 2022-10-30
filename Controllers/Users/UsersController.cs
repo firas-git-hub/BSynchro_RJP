@@ -1,6 +1,6 @@
 ﻿using BSynchro_RJP.Controllers.Users.Models;
+using BSynchro_RJP.Interface.Customers;
 using BSynchro_RJP.Models.Entities;
-using BSynchro_RJP.Services.Customers;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -20,17 +20,33 @@ namespace BSynchro_RJP.Controllers.Users
         }
 
         [HttpPost]
-        public IActionResult CreateNewAccountForUser([FromBody] CreateNewAccountData data)
+        public IActionResult CreateNewAccountForUser([FromBody] CreateNewAccountModel data)
         {
-            _customersContextService.AddUserAccount(data.UserId, data.InitialCredit);
-            return Ok();
+            try
+            {
+                _customersContextService.AddUserAccount(data.UserId, data.InitialCredit);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error CreateNewAccountForUser " + ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
         public ActionResult<UserInfo> GetUser([FromHeader] int userId)
         {
-            UserInfo? userInfoToGet = _customersContextService.GetUserInfo(userId);
-            return userInfoToGet == null ?  NotFound() : Ok(userInfoToGet);
+            try
+            {
+                UserInfo? userInfoToGet = _customersContextService.GetUserInfo(userId);
+                return userInfoToGet == null ? NotFound() : Ok(userInfoToGet);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error GetUser " + ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

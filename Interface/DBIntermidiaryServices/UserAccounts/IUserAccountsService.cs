@@ -1,7 +1,7 @@
 ﻿using BSynchro_RJP.Models.Entities;
 using BSynchro_RJP.Models.Responses;
 
-namespace BSynchro_RJP.Services.DBIntermidiaryServices.UserAccounts
+namespace BSynchro_RJP.Interface.DBIntermidiaryServices.UserAccounts
 {
     public interface IUserAccountsService
     {
