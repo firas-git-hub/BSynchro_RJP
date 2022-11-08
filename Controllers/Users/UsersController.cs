@@ -48,5 +48,35 @@ namespace BSynchro_RJP.Controllers.Users
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult<List<User>> GetAllUsers()
+        {
+            try
+            {
+                List<User>? users = _customersContextService.GetAllUsers();
+                return users == null ? NotFound() : Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error GetAllUsers " + ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult<User> CreateUser([FromBody] CreateNewUserModel newUser)
+        {
+            try
+            {
+                int? newUserId = _customersContextService.CreateNewUser(newUser);
+                return newUserId == null ? BadRequest() : Ok(newUserId);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error CreateUser " + ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

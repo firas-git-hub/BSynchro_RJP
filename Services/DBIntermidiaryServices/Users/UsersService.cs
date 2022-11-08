@@ -35,5 +35,38 @@ namespace BSynchro_RJP.Services.DBIntermidiaryServices.Users
                 return null;
             }
         }
+
+        public List<User>? GetAllUsers()
+        {
+            try
+            {
+                List<User>? users = _context.Users.ToList();
+                if(users != null)
+                {
+                    return users;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error GetAllUsers: " + ex.Message);
+                return null;
+            }
+        }
+
+        public int? CreateNewUser(User newUser)
+        {
+            try
+            {
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+                return newUser.Id;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error CreateNewUser: " + ex.Message);
+                return null;
+            }
+        }
     }
 }

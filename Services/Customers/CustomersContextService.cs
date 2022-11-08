@@ -1,4 +1,5 @@
 ﻿using BSynchro_RJP.Controllers.Users;
+using BSynchro_RJP.Controllers.Users.Models;
 using BSynchro_RJP.Interface.Customers;
 using BSynchro_RJP.Interface.DBIntermidiaryServices.AccountTransactions;
 using BSynchro_RJP.Interface.DBIntermidiaryServices.UserAccounts;
@@ -75,6 +76,53 @@ namespace BSynchro_RJP.Services.Customers
             catch (Exception ex)
             {
                 _logger.Log(LogLevel.Error, "error PrepareUserInfoData: " + ex.Message);
+                return null;
+            }
+        }
+
+        public List<User>? GetAllUsers()
+        {
+            try
+            {
+                List<User>? usersToReturn = _usersService.GetAllUsers();
+                if (usersToReturn != null)
+                {
+                    return usersToReturn;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error GetAllUsers: " + ex.Message);
+                return null;
+            }
+        }
+
+        public int? CreateNewUser(CreateNewUserModel newUser)
+        {
+            try
+            {
+                if (
+                    newUser != null &&
+                    newUser.Surname != "" &&
+                    newUser.Surname != null &&
+                    newUser.Name != "" &&
+                    newUser.Name != null
+                   )
+                {
+                    User userToCreate = new User()
+                    {
+                        Name = newUser.Name,
+                        Surname = newUser.Surname
+                    };
+                    int? newUserId = _usersService.CreateNewUser(userToCreate);
+                    return newUserId != null ? newUserId : null;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, "error CreateNewUser: " + ex.Message);
                 return null;
             }
         }
